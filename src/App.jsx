@@ -11,6 +11,12 @@ import Contact     from './pages/Contact'
 import Cart        from './pages/Cart'
 import Checkout    from './pages/Checkout'
 import Reviews     from './pages/Reviews'
+import WhatsAppButton from './components/WhatsAppButton'
+import FAQ         from './pages/FAQ'
+import RefundPolicy from './pages/RefundPolicy'
+import PrivacyPolicy    from './pages/PrivacyPolicy'
+import TermsConditions  from './pages/TermsConditions'
+import OrderTracking from './pages/OrderTracking'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -34,8 +40,14 @@ function Layout() {
         <Route path="/reviews"     element={<Reviews />} />
         <Route path="/cart"        element={<Cart />} />
         <Route path="/checkout"    element={<Checkout />} />
+        <Route path="/faq"    element={<FAQ />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/privacy-policy"   element={<PrivacyPolicy />} />
+        <Route path="/terms-conditions" element={<TermsConditions />} />
+        <Route path="/order-tracking" element={<OrderTracking />} />
       </Routes>
        <Footer />
+       <WhatsAppButton />
     </>
   )
 }

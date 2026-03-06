@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useCart } from '../context/CartContext'
 import { getProducts } from '../api'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import './BestSeller.css'
 
 const hardcodedProducts = [
@@ -22,33 +23,42 @@ const CartIcon = () => (
 
 export default function BestSeller() {
   const { addToCart } = useCart()
-  const [apiProducts, setApiProducts]   = useState([])
-  const [added, setAdded]               = useState({})
-  const [hovered, setHovered]           = useState({})
-  const [startIndex, setStartIndex]     = useState(0)
-  const visible = 4
+  const [apiProducts, setApiProducts] = useState([])
+  const [added, setAdded]             = useState({})
+  const [hovered, setHovered]         = useState({})
+  const [startIndex, setStartIndex]   = useState(0)
+  const [visibleCount, setVisibleCount] = useState(4)
+  const [showAll, setShowAll]         = useState(false)
 
   useEffect(() => {
     getProducts()
       .then(data => {
         const formatted = data.map(p => ({
-          id:       `api_${p.id}`,
-          name:     p.name,
-          price:    p.price,
-          oldPrice: p.old_price,
-          discount: p.discount,
-          img:      p.image,
+          id: `api_${p.id}`, name: p.name, price: p.price,
+          oldPrice: p.old_price, discount: p.discount, img: p.image,
         }))
         setApiProducts(formatted)
       })
       .catch(() => {})
   }, [])
 
-  // Django products pehle + hardcoded baad mein
+  // Responsive visible count
+  useEffect(() => {
+    const update = () => {
+      if (window.innerWidth < 600) setVisibleCount(1)
+      else if (window.innerWidth < 900) setVisibleCount(2)
+      else if (window.innerWidth < 1200) setVisibleCount(3)
+      else setVisibleCount(4)
+    }
+    update()
+    window.addEventListener('resize', update)
+    return () => window.removeEventListener('resize', update)
+  }, [])
+
   const products = [...apiProducts, ...hardcodedProducts]
 
   const prev = () => setStartIndex(i => Math.max(0, i - 1))
-  const next = () => setStartIndex(i => Math.min(products.length - visible, i + 1))
+  const next = () => setStartIndex(i => Math.min(products.length - visibleCount, i + 1))
 
   const handleAddToCart = (product) => {
     addToCart(product)
@@ -56,50 +66,46 @@ export default function BestSeller() {
     setTimeout(() => setAdded(prev => ({ ...prev, [product.id]: false })), 1500)
   }
 
-  const visibleProducts = products.slice(startIndex, startIndex + visible)
+  // Mobile: show all or first 2
+  const isMobile = visibleCount <= 2
+  const displayedProducts = isMobile
+    ? (showAll ? products : products.slice(0, 2))
+    : products.slice(startIndex, startIndex + visibleCount)
 
   return (
     <section className="bestseller-section">
-
-      {/* Heading */}
       <div className="bestseller-header">
         <div className="bestseller-title-wrap">
           <span className="bs-line" />
           <h2 className="bestseller-title">OUR BEST SELLER</h2>
           <span className="bs-line" />
         </div>
-        <a href="/bags" className="bs-shop-now">Shop Now →</a>
+        <a href="/bags" className="bs-shop-now">Shop Now &rarr;</a>
       </div>
 
-      {/* Slider */}
       <div className="bs-slider-wrap">
-
-        <button className="bs-arrow" onClick={prev} disabled={startIndex === 0}>‹</button>
+        {!isMobile && (
+          <button className="bs-arrow" onClick={prev} disabled={startIndex === 0}>
+            <ChevronLeft size={20} />
+          </button>
+        )}
 
         <div className="bs-products">
-          {visibleProducts.map(product => (
+          {displayedProducts.map(product => (
             <div key={product.id} className="bs-card">
-
-              {/* Discount Badge */}
               <div className="bs-discount">-{product.discount}%</div>
-
-              {/* Image */}
               <div className="bs-img-wrap">
                 <img src={product.img} alt={product.name} className="bs-img" />
               </div>
-
-              {/* Info */}
               <div className="bs-info">
                 <p className="bs-name">{product.name}</p>
                 <div className="bs-prices">
-                  <span className="bs-old">Rs.{product.oldPrice.toLocaleString()}.00</span>
-                  <span className="bs-new">Rs.{product.price.toLocaleString()}.00</span>
+                  <span className="bs-old">Rs.{product.oldPrice?.toLocaleString()}.00</span>
+                  <span className="bs-new">Rs.{product.price?.toLocaleString()}.00</span>
                 </div>
               </div>
-
-              {/* Add to Cart Button */}
               <button
-                className={`bs-cart-btn ${added[product.id] ? 'added' : ''} ${hovered[product.id] && !added[product.id] ? 'hovered' : ''}`}
+                className={`bs-cart-btn ${added[product.id] ? 'added' : ''}`}
                 onClick={() => handleAddToCart(product)}
                 onMouseEnter={() => setHovered(p => ({ ...p, [product.id]: true }))}
                 onMouseLeave={() => setHovered(p => ({ ...p, [product.id]: false }))}
@@ -112,14 +118,25 @@ export default function BestSeller() {
                   <span className="btn-content">ADD TO CART</span>
                 )}
               </button>
-
             </div>
           ))}
         </div>
 
-        <button className="bs-arrow" onClick={next} disabled={startIndex >= products.length - visible}>›</button>
-
+        {!isMobile && (
+          <button className="bs-arrow" onClick={next} disabled={startIndex >= products.length - visibleCount}>
+            <ChevronRight size={20} />
+          </button>
+        )}
       </div>
+
+      {/* Mobile: Show More button */}
+      {isMobile && products.length > 2 && (
+        <div className="bs-show-more">
+          <button onClick={() => setShowAll(s => !s)} className="bs-show-more-btn">
+            {showAll ? 'Show Less' : `Show More (${products.length - 2} more)`}
+          </button>
+        </div>
+      )}
     </section>
   )
 }

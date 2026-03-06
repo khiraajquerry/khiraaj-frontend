@@ -1,0 +1,252 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&display=swap');
+
+.track-page {
+  min-height: 100vh;
+  background: var(--white);
+  padding-bottom: 80px;
+}
+
+/* Hero */
+.track-hero {
+  text-align: center;
+  padding: 60px 20px 40px;
+  border-bottom: 1px solid var(--light-gray);
+}
+.track-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: 12px;
+  color: var(--black);
+  margin: 0 0 8px;
+}
+.track-subtitle {
+  font-size: 11px;
+  letter-spacing: 3px;
+  color: var(--gray);
+  text-transform: uppercase;
+  margin: 0;
+}
+
+/* Container */
+.track-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 48px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Form */
+.track-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.track-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.track-input-group label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--black);
+}
+.track-input-group input {
+  border: 1px solid var(--light-gray);
+  padding: 12px 16px;
+  font-size: 14px;
+  outline: none;
+  font-family: var(--font-body);
+  transition: border-color 0.3s;
+  color: var(--black);
+}
+.track-input-group input:focus { border-color: var(--black); }
+.track-btn {
+  background: var(--black);
+  color: white;
+  border: none;
+  padding: 14px;
+  font-family: var(--font-body);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.3s;
+  margin-top: 4px;
+}
+.track-btn:hover { background: var(--brown); }
+.track-btn:disabled { opacity: 0.6; cursor: not-allowed; }
+.track-error {
+  color: #e02020;
+  font-size: 13px;
+  text-align: center;
+}
+
+/* Result */
+.track-result {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  animation: fadeIn 0.4s ease;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Info Box */
+.track-info-box {
+  border: 1px solid var(--light-gray);
+  padding: 20px 24px;
+  background: #faf8f5;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.track-info-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.track-info-row span { color: var(--gray); }
+.track-info-row strong { color: var(--black); }
+
+/* Steps */
+.track-steps {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding: 24px 0;
+  position: relative;
+}
+.track-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+  position: relative;
+}
+.track-step-circle {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--light-gray);
+  background: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--gray);
+  z-index: 1;
+  transition: all 0.3s;
+}
+.track-step--done .track-step-circle {
+  background: var(--black);
+  border-color: var(--black);
+  color: white;
+}
+.track-step--active .track-step-circle {
+  border-color: var(--brown);
+  color: var(--brown);
+  box-shadow: 0 0 0 4px rgba(139,99,67,0.15);
+}
+.track-step-line {
+  position: absolute;
+  top: 18px;
+  left: 50%;
+  width: 100%;
+  height: 2px;
+  background: var(--light-gray);
+  z-index: 0;
+}
+.track-step-line--done { background: var(--black); }
+.track-step-label {
+  font-size: 10px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--gray);
+  margin-top: 8px;
+  text-align: center;
+}
+.track-step--done .track-step-label,
+.track-step--active .track-step-label { color: var(--black); font-weight: 600; }
+
+/* Cancelled */
+.track-cancelled {
+  text-align: center;
+  padding: 20px;
+  background: #fff0f0;
+  border: 1px solid #ffcccc;
+  font-size: 14px;
+  color: #e02020;
+  font-weight: 600;
+}
+
+/* Status Message */
+.track-status-msg {
+  background: #f5f0e8;
+  border-left: 3px solid var(--brown);
+  padding: 14px 18px;
+}
+.track-status-msg p {
+  font-size: 13px;
+  color: #444;
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* Items */
+.track-items h3 {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--black);
+  margin: 0 0 12px;
+  letter-spacing: 1px;
+}
+.track-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--light-gray);
+  font-size: 13px;
+  color: var(--black);
+}
+.track-item:last-child { border-bottom: none; }
+
+/* Help */
+.track-help {
+  text-align: center;
+  padding: 24px;
+  border: 1px solid var(--light-gray);
+}
+.track-help p {
+  font-size: 13px;
+  color: var(--gray);
+  margin: 0 0 12px;
+}
+.track-wa-btn {
+  display: inline-block;
+  background: #25D366;
+  color: white;
+  text-decoration: none;
+  padding: 11px 24px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  transition: background 0.3s;
+}
+.track-wa-btn:hover { background: #20bc5a; }
+
+@media (max-width: 600px) {
+  .track-title { font-size: 32px; letter-spacing: 6px; }
+  .track-container { padding: 32px 16px; }
+  .track-step-label { font-size: 9px; }
+}

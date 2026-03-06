@@ -74,23 +74,14 @@ export default function Footer() {
 
         {/* Help */}
         <div className="footer-col">
-          <h4>Help</h4>
+          <h4>Help & Info</h4>
           <ul>
             <li><Link to="/contact">Contact Us</Link></li>
-            <li><Link to="#">Order Tracking</Link></li>
-            <li><Link to="#">Returns Policy</Link></li>
-            <li><Link to="#">FAQ</Link></li>
-          </ul>
-        </div>
-
-        {/* Info */}
-        <div className="footer-col">
-          <h4>Info</h4>
-          <ul>
-            <li><Link to="#">About Us</Link></li>
-            <li><Link to="#">Privacy Policy</Link></li>
-            <li><Link to="#">Terms & Conditions</Link></li>
-            <li><Link to="#">Delivery Info</Link></li>
+            <li><Link to="/order-tracking">Order Tracking</Link></li>
+            <li><Link to="/refund-policy">Returns & Refund Policy</Link></li>
+            <li><Link to="/faq">FAQ</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
+            <li><Link to="/terms-conditions">Terms of Service</Link></li>
           </ul>
         </div>
 
@@ -98,7 +89,7 @@ export default function Footer() {
 
       <div className="footer-bottom">
         <p>© 2026 Khiraaj.pk. All rights reserved.</p>
-        <p>Cash on Delivery · Free Delivery Above Rs 4,000</p>
+        <p>Cash on Delivery · Free Delivery </p>
       </div>
     </footer>
   )

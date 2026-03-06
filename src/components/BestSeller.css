@@ -185,6 +185,28 @@
 }
 
 .bs-cart-btn.added { letter-spacing: 3px; }
+/* Add these to BestSeller.css */
+.bs-show-more {
+  text-align: center;
+  margin-top: 24px;
+}
+.bs-show-more-btn {
+  border: 1px solid var(--black);
+  background: none;
+  color: var(--black);
+  padding: 12px 32px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+}
+.bs-show-more-btn:hover {
+  background: var(--black);
+  color: white;
+}
 
 /* Responsive */
 @media (max-width: 1100px) {

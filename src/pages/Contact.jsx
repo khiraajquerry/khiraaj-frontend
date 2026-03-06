@@ -95,28 +95,11 @@ export default function Contact() {
               <a href="tel:+923334124921">+92 333 4124921</a>
             </div>
             <div className="info-row">
-              <strong>For Calls UAN:</strong>{" "}
-              <a href="tel:03041116668">0304-111-666-8</a>
-            </div>
-            <div className="info-row">
               <strong>E-Mail:</strong>{" "}
               <a href="mailto:bagx.pk@gmail.com">bagx.pk@gmail.com</a>
             </div>
           </div>
         </div>
-
-        <div className="section">
-          <div className="section-title">Locate Us</div>
-          <div className="info-list">
-            <div className="info-row">
-              <strong>Corporate Office:</strong> Bag X Building, 6 – A Waris Road Lahore Pakistan
-            </div>
-            <div className="info-row">
-              <strong>Factory:</strong> 18km Ferozpur Road Lahore Pakistan
-            </div>
-          </div>
-        </div>
-
       </div>
     </>
   );

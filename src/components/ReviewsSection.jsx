@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { getReviews } from '../api'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import './ReviewsSection.css'
 
 const fakeReviews = [
@@ -28,7 +29,14 @@ export default function ReviewsSection() {
       .catch(() => setReviews(fakeReviews))
   }, [])
 
-  const visible = window.innerWidth < 1100 ? 1 : 3
+  const [visible, setVisible] = useState(window.innerWidth < 1100 ? 1 : 3)
+
+  useEffect(() => {
+  const handleResize = () => setVisible(window.innerWidth < 1100 ? 1 : 3)
+  window.addEventListener('resize', handleResize)
+  return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
   const prev = () => setIndex(i => Math.max(0, i - 1))
   const next = () => setIndex(i => Math.min(reviews.length - visible, i + 1))
   const shown = reviews.slice(index, index + visible)
@@ -44,7 +52,9 @@ export default function ReviewsSection() {
       </div>
 
       <div className="rs-slider">
-        <button className="rs-arrow" onClick={prev} disabled={index === 0}>‹</button>
+       <button className="rs-arrow" onClick={prev} disabled={index === 0}>
+  <ChevronLeft size={20} />
+</button>
 
         <div className="rs-cards">
           {shown.map(r => (
@@ -65,8 +75,9 @@ export default function ReviewsSection() {
             </div>
           ))}
         </div>
-
-        <button className="rs-arrow" onClick={next} disabled={index >= reviews.length - visible}>›</button>
+<button className="rs-arrow" onClick={next} disabled={index >= reviews.length - visible}>
+  <ChevronRight size={20} />
+</button>
       </div>
 
       {/* Mobile dots */}

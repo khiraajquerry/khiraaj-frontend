@@ -42,3 +42,11 @@ export const validateCoupon = async (code, total) => {
   })
   return res.json()
 }
+export const getFAQs = async () => {
+  const res = await fetch(`${BASE_URL}/faqs/`)
+  return res.json()
+}
+export const trackOrder = async (orderId, phone) => {
+  const res = await fetch(`${BASE_URL}/orders/track/?order_id=${orderId}&phone=${phone}`)
+  return res.json()
+}

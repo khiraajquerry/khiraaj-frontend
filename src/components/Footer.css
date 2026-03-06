@@ -76,6 +76,8 @@
 .footer-col ul li a {
   color: rgba(248, 246, 242, 0.5);
   font-size: 13px;
+  cursor: pointer;
+  pointer-events: all;
   transition: color 0.3s;
   text-decoration: none;
 }

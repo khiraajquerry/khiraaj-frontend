@@ -3,9 +3,9 @@ import { getSettings } from '../api'
 import './AnnouncementBar.css'
 
 const defaultMessages = [
-  'FREE DELIVERY ABOVE RS 4,000/– &nbsp;•&nbsp; Standard Delivery Rs 199/– Only',
+  'EID SALE UP TO 50% OFF &nbsp;•&nbsp; ',
   'NEW ARRIVALS ARE HERE &nbsp;•&nbsp; Shop the Latest Collection Now',
-  'CASH ON DELIVERY AVAILABLE &nbsp;•&nbsp; All Across Pakistan',
+  'Free DELIVERY AVAILABLE &nbsp;•&nbsp; All Across Pakistan',
 ]
 
 export default function AnnouncementBar() {
