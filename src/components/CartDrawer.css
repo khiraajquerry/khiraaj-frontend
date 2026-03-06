@@ -19,6 +19,7 @@
   width: 420px;
   max-width: 95vw;
   height: 100vh;
+  height: 100dvh;  
   overflow: hidden;
   background: var(--white);
   z-index: 2200;           /* ✅ HIGHER than overlay (was 2100) */
@@ -97,7 +98,8 @@
 
 /* Items list */
 .drawer-items {
-  flex: 1;
+  flex: 1 1 0;
+  min-height: 0;
   overflow-y: auto;
   min-height: 0;
   padding: 16px 24px;
