@@ -19,6 +19,7 @@
   width: 420px;
   max-width: 95vw;
   height: 100vh;
+  overflow: hidden;
   background: var(--white);
   z-index: 2200;           /* ✅ HIGHER than overlay (was 2100) */
   display: flex;
@@ -98,6 +99,7 @@
 .drawer-items {
   flex: 1;
   overflow-y: auto;
+  min-height: 0;
   padding: 16px 24px;
   /* ✅ Smooth scroll on iOS */
   -webkit-overflow-scrolling: touch;
@@ -239,6 +241,7 @@
   background: var(--white);
   position: relative;  /* ✅ establish stacking context */
   z-index: 1;
+  flex-shrink: 0;
 }
 .drawer-subtotal {
   display: flex;
