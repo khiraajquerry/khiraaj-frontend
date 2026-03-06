@@ -40,7 +40,10 @@
   border-bottom: 1px solid var(--light-gray);
   position: relative;
 }
-.toolbar-left { position: relative; }
+.toolbar-left { position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;}
 
 /* Filter Button */
 .filter-btn {

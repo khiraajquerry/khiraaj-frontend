@@ -8,9 +8,9 @@ import './Bags.css'
 const hardcodedProducts = [
   { id: 101, name: 'Haul Bag Brown Set Of 3',  oldPrice: 7000, price: 1599, discount: 77, img: '/img3.jpg', color: 'Brown',  colorHex: '#8B6343', inStock: true },
   { id: 102, name: 'Haul Bag Black Set Of 3',  oldPrice: 7000, price: 1599, discount: 77, img: '/img4.jpg', color: 'Black',  colorHex: '#1a1a1a', inStock: true },
-  { id: 103, name: 'Blunt Set Of 2 Brown',     oldPrice: 5000, price: 1599, discount: 68, img: '/img5.jpg', color: 'Brown',  colorHex: '#8B6343', inStock: true },
+  { id: 103, name: 'Blunt Set Of 2 Brown',     oldPrice: 5000, price: 1599, discount: 68, img: '/img5.jpg', color: 'White',  colorHex: '#ececec', inStock: true },
   { id: 104, name: 'Blunt Set Of 2 Black',     oldPrice: 5000, price: 1599, discount: 68, img: '/img6.jpg', color: 'Black',  colorHex: '#1a1a1a', inStock: true },
-  { id: 105, name: 'Tote Bag Premium Brown',   oldPrice: 6000, price: 1899, discount: 68, img: '/img7.jpg', color: 'Brown',  colorHex: '#8B6343', inStock: true },
+  { id: 105, name: 'Tote Bag Premium Pink',   oldPrice: 6000, price: 1899, discount: 68, img: '/img7.jpg', color: 'Pink',  colorHex: '#8B6343', inStock: true },
   { id: 106, name: 'Crossbody Bag Beige',      oldPrice: 4500, price: 1499, discount: 67, img: '/img3.jpg', color: 'Beige',  colorHex: '#C9A96E', inStock: true },
   { id: 107, name: 'Shoulder Bag Cream',       oldPrice: 5000, price: 1699, discount: 66, img: '/img4.jpg', color: 'Cream',  colorHex: '#F5F0E8', inStock: false },
   { id: 108, name: 'Mini Tote Burgundy',       oldPrice: 4800, price: 1599, discount: 67, img: '/meroon.jpg', color: 'Maroon', colorHex: '#800020', inStock: true },

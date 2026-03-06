@@ -17,14 +17,22 @@ export default function CartDrawer({ isOpen, onClose }) {
 
   return (
     <>
-      <div className={`drawer-overlay ${isOpen ? 'open' : ''}`} onClick={onClose} />
+      {/* Overlay: clicking it closes the drawer */}
+      <div
+        className={`drawer-overlay ${isOpen ? 'open' : ''}`}
+        onClick={onClose}
+      />
 
-      <div className={`cart-drawer ${isOpen ? 'open' : ''}`}>
+      {/* Drawer: stop clicks from bubbling up to the overlay */}
+      <div
+        className={`cart-drawer ${isOpen ? 'open' : ''}`}
+        onClick={(e) => e.stopPropagation()}   // ✅ KEY FIX
+      >
 
         {/* Header */}
         <div className="drawer-header">
           <h2 className="drawer-title">Your Cart</h2>
-          <button className="drawer-close" onClick={onClose}>
+          <button className="drawer-close" onClick={onClose} aria-label="Close cart">
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
               <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
             </svg>
@@ -42,7 +50,9 @@ export default function CartDrawer({ isOpen, onClose }) {
                 <circle cx="50" cy="41" r="3" fill="#c8b89a"/>
               </svg>
               <p>Your cart is empty</p>
-              <button className="continue-shopping" onClick={handleContinue}>Continue Shopping</button>
+              <button className="continue-shopping" onClick={handleContinue}>
+                Continue Shopping
+              </button>
             </div>
           ) : (
             cartItems.map(item => (
@@ -54,12 +64,26 @@ export default function CartDrawer({ isOpen, onClose }) {
                   <p className="item-name">{item.name}</p>
                   <p className="item-price">Rs.{item.price.toLocaleString()}</p>
                   <div className="item-qty">
-                    <button onClick={() => updateQuantity(item.id, item.quantity - 1)}>&#8722;</button>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                      aria-label="Decrease quantity"
+                    >
+                      &#8722;
+                    </button>
                     <span>{item.quantity}</span>
-                    <button onClick={() => updateQuantity(item.id, item.quantity + 1)}>+</button>
+                    <button
+                      onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                      aria-label="Increase quantity"
+                    >
+                      +
+                    </button>
                   </div>
                 </div>
-                <button className="item-remove" onClick={() => removeFromCart(item.id)}>
+                <button
+                  className="item-remove"
+                  onClick={() => removeFromCart(item.id)}
+                  aria-label={`Remove ${item.name} from cart`}
+                >
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
                   </svg>

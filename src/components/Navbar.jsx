@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import SearchOverlay from './SearchOverlay'
 import CartDrawer from './CartDrawer'
+import WhatsAppButton from './WhatsAppButton'   // ✅ ADD
 import './Navbar.css'
 
 const navLinks = [
@@ -26,7 +27,7 @@ export default function Navbar() {
   const [scrolled,   setScrolled]   = useState(false)
   const [searchOpen, setSearchOpen] = useState(false)
   const [menuOpen,   setMenuOpen]   = useState(false)
-  const [cartOpen,   setCartOpen]   = useState(false)
+  const [cartOpen,   setCartOpen]   = useState(false)   // ✅ yahi ek state sab control kare
   const { cartCount } = useCart()
 
   useEffect(() => {
@@ -91,13 +92,9 @@ export default function Navbar() {
       </nav>
 
       {/* ── MOBILE MENU ── */}
-      {/* Overlay */}
       <div className={`menu-overlay ${menuOpen ? 'open' : ''}`} onClick={closeMenu} />
 
-      {/* Drawer */}
       <div className={`mobile-menu ${menuOpen ? 'open' : ''}`}>
-
-        {/* 1. Brand name on top */}
         <div className="mm-brand">
           <span className="mm-logo">KHIRAAJ</span>
           <span className="mm-tagline">CARRY ELEGANCE EVERYDAY</span>
@@ -105,7 +102,6 @@ export default function Navbar() {
 
         <div className="mm-divider" />
 
-        {/* 2. Nav Links */}
         <ul className="mobile-nav-links">
           {navLinks.map((link, i) => (
             <li key={link.path} style={{ transitionDelay: menuOpen ? `${0.1 + i * 0.07}s` : '0s' }}
@@ -117,7 +113,6 @@ export default function Navbar() {
 
         <div className="mm-divider" />
 
-        {/* 3. Search */}
         <button onClick={() => { setSearchOpen(true); closeMenu() }} className="mm-search-btn">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
             <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
@@ -125,7 +120,6 @@ export default function Navbar() {
           Search Store
         </button>
 
-        {/* 4. Footer info */}
         <div className="mm-footer">
           <div className="mm-socials">
             <a href="https://www.instagram.com/khiraaj.pk" target="_blank" rel="noreferrer">Instagram</a>
@@ -135,11 +129,15 @@ export default function Navbar() {
             <a href="https://wa.me/923001234567" target="_blank" rel="noreferrer">WhatsApp</a>
           </div>
         </div>
-
       </div>
 
       <SearchOverlay isOpen={searchOpen} onClose={() => setSearchOpen(false)} />
+
+      {/* ✅ CartDrawer — same cartOpen state */}
       <CartDrawer isOpen={cartOpen} onClose={() => setCartOpen(false)} />
+
+      {/* ✅ WhatsAppButton — cartOpen pass karo, automatically shift hoga */}
+      <WhatsAppButton cartOpen={cartOpen} />
     </>
   )
 }

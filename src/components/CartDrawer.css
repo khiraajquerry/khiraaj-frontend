@@ -20,17 +20,19 @@
   max-width: 95vw;
   height: 100vh;
   background: var(--white);
-  z-index: 2100;
+  z-index: 2200;           /* ✅ HIGHER than overlay (was 2100) */
   display: flex;
   flex-direction: column;
   transition: right 0.75s cubic-bezier(0.23, 1, 0.32, 1), 
               visibility 0.75s cubic-bezier(0.23, 1, 0.32, 1);
   box-shadow: -4px 0 30px rgba(0,0,0,0.12);
   visibility: hidden;
+  pointer-events: none;    /* ✅ invisible = not clickable */
 }
 .cart-drawer.open { 
   right: 0; 
   visibility: visible;
+  pointer-events: all;     /* ✅ only active when open */
 }
 
 /* Header */
@@ -57,6 +59,10 @@
   display: flex;
   align-items: center;
   transition: color 0.3s;
+  /* ✅ Ensure tap target is large enough on mobile */
+  min-width: 44px;
+  min-height: 44px;
+  justify-content: center;
 }
 .drawer-close:hover { color: var(--brown); }
 
@@ -93,6 +99,8 @@
   flex: 1;
   overflow-y: auto;
   padding: 16px 24px;
+  /* ✅ Smooth scroll on iOS */
+  -webkit-overflow-scrolling: touch;
 }
 
 /* Empty state */
@@ -124,6 +132,10 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.3s;
+  /* ✅ Mobile tap target */
+  min-height: 44px;
+  position: relative;
+  z-index: 1;
 }
 .continue-shopping:hover { background: var(--brown); }
 
@@ -181,8 +193,9 @@
 .item-qty button {
   background: none;
   border: none;
-  width: 30px;
-  height: 30px;
+  /* ✅ Larger tap target for mobile */
+  width: 36px;
+  height: 36px;
   font-size: 16px;
   cursor: pointer;
   color: var(--black);
@@ -190,6 +203,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
+  z-index: 1;
 }
 .item-qty button:hover { background: var(--light-gray); }
 .item-qty span {
@@ -199,7 +214,7 @@
   font-weight: 600;
   border-left: 1px solid var(--light-gray);
   border-right: 1px solid var(--light-gray);
-  line-height: 30px;
+  line-height: 36px;
 }
 
 /* Remove button */
@@ -210,8 +225,10 @@
   border: none;
   cursor: pointer;
   color: #aaa;
-  padding: 2px;
+  /* ✅ Larger tap target for mobile */
+  padding: 8px;
   transition: color 0.2s;
+  z-index: 1;
 }
 .item-remove:hover { color: #e02020; }
 
@@ -220,6 +237,8 @@
   padding: 20px 24px 28px;
   border-top: 1px solid var(--light-gray);
   background: var(--white);
+  position: relative;  /* ✅ establish stacking context */
+  z-index: 1;
 }
 .drawer-subtotal {
   display: flex;
@@ -263,7 +282,12 @@
   position: relative;
   overflow: hidden;
   border-radius: 0;
+  border: none;
+  cursor: pointer;
+  /* ✅ Mobile tap target + proper stacking */
+  min-height: 48px;
   z-index: 1;
+  isolation: isolate;  /* ✅ contain the ::before pseudo-element */
 }
 .drawer-checkout-btn::before {
   content: '';
@@ -291,6 +315,10 @@
   text-transform: uppercase;
   cursor: pointer;
   transition: background 0.3s, color 0.3s;
+  /* ✅ Mobile tap target */
+  min-height: 48px;
+  position: relative;
+  z-index: 1;
 }
 .drawer-continue:hover { background: var(--black); color: var(--white); }
 
