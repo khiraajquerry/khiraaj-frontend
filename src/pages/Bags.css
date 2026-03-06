@@ -544,9 +544,4 @@
 @media (max-width: 380px) {
   .bags-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 0 8px; gap: 6px; }
   .bag-cart-btn { font-size: 8px; padding: 8px 4px; }
-  .reset-btn {
-    padding: 8px 8px;
-    font-size: 9px;
-    letter-spacing: 1px;
-  }
 }
