@@ -143,7 +143,7 @@
 .pd-breadcrumb button:hover { color: var(--black); }
 
 .pd-name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Times New Roman', Times, serif;
   font-size: 40px;
   font-weight: 600;
   color: var(--black);
