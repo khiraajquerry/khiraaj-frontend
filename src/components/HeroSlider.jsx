@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import img1 from '../assets/img1.png'
-import img2 from '../assets/img2.png'
+import he from '../assets/he.jpeg'
+import hei from '../assets/hei.jpeg'
 import './HeroSlider.css'
 
 const slides = [
@@ -12,7 +12,7 @@ const slides = [
     desc: 'Handcrafted bags that blend timeless elegance with modern utility. Each piece tells a story worth carrying.',
     btnText: 'Shop Collection',
     btnLink: '/bags',
-    img: img1,
+    img: he,
   },
   {
     tag: 'Accessories',
@@ -21,7 +21,7 @@ const slides = [
     desc: 'Discover our exclusive accessories collection. Premium quality pieces crafted for the modern woman.',
     btnText: 'Shop Accessories',
     btnLink: '/accessories',
-    img: img2,
+    img: hei,
   },
   {
     tag: 'Office Essentials',
@@ -30,7 +30,7 @@ const slides = [
     desc: 'Professional bags designed for the modern workspace. Organized, sleek, and built to last.',
     btnText: 'Explore Now',
     btnLink: '/bags',
-    img: img1,
+    img: he,
   },
   {
     tag: 'Limited Edition',
@@ -39,7 +39,7 @@ const slides = [
     desc: 'Exclusive pieces with premium materials. Limited availability',
     btnText: 'View New Arrivals',
     btnLink: '/new-arrival',
-    img: img2,
+    img: hei,
   },
   {
     tag: 'Free Delivery',
@@ -48,7 +48,7 @@ const slides = [
     desc: 'Free delivery on orders available across Pakistan.',
     btnText: 'Shop Now',
     btnLink: '/bags',
-    img: img1,
+    img:he,
   },
 ]
 
