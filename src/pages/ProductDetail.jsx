@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
 import { getProducts } from '../api'
@@ -16,6 +16,7 @@ export default function ProductDetail() {
   const [quantity, setQuantity]       = useState(1)
   const [zoom, setZoom]               = useState(false)
   const [loading, setLoading]         = useState(true)
+  const touchStartX = useRef(null)
 
   useEffect(() => {
     setLoading(true)
@@ -41,14 +42,9 @@ export default function ProductDetail() {
             colorHex: v.color_hex,
           })),
         }))
-
         setAllProducts(apiProducts)
-
         const found = apiProducts.find(p => String(p.id) === String(id))
-        if (found) {
-          setProduct(found)
-          setActiveImg(0)
-        }
+        if (found) { setProduct(found); setActiveImg(0) }
         setLoading(false)
       })
       .catch(() => setLoading(false))
@@ -70,15 +66,20 @@ export default function ProductDetail() {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  if (loading) return (
-    <div className="pd-loading"><div className="pd-spinner" /></div>
-  )
+  // Touch swipe for main image
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null || !product) return
+    const diff = touchStartX.current - e.changedTouches[0].clientX
+    if (diff > 40) setActiveImg(i => Math.min(i + 1, product.images.length - 1))
+    else if (diff < -40) setActiveImg(i => Math.max(i - 1, 0))
+    touchStartX.current = null
+  }
 
-  if (!product) return (
-    <div className="pd-loading">
-      <p style={{ fontSize: '14px', color: '#888' }}>Product not found.</p>
-    </div>
-  )
+  if (loading) return <div className="pd-loading"><div className="pd-spinner" /></div>
+  if (!product) return <div className="pd-loading"><p style={{ fontSize: '14px', color: '#888' }}>Product not found.</p></div>
 
   const savings = (product.oldPrice || 0) - product.price
 
@@ -88,7 +89,9 @@ export default function ProductDetail() {
 
         {/* ── LEFT: Images ── */}
         <div className="pd-images">
-          <div className="pd-thumbs">
+
+          {/* Desktop: thumbs on left side */}
+          <div className="pd-thumbs pd-thumbs--desktop">
             {product.images.map((img, i) => (
               <button
                 key={i}
@@ -100,20 +103,56 @@ export default function ProductDetail() {
             ))}
           </div>
 
+          {/* Main image */}
           <div
             className={`pd-main-img ${zoom ? 'pd-main-img--zoom' : ''}`}
             onClick={() => setZoom(z => !z)}
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
           >
             <img src={product.images[activeImg]} alt={product.name} />
             {product.discount && <div className="pd-badge">-{product.discount}%</div>}
             {!product.inStock && <div className="pd-oos-overlay">OUT OF STOCK</div>}
             <span className="pd-zoom-hint">{zoom ? '−' : '+'}</span>
+
+            {/* Mobile swipe arrows */}
+            <div className="pd-mobile-arrows">
+              <button
+                className="pd-mob-arrow"
+                onClick={(e) => { e.stopPropagation(); setActiveImg(i => Math.max(i - 1, 0)) }}
+                disabled={activeImg === 0}
+              >&#8249;</button>
+              <button
+                className="pd-mob-arrow"
+                onClick={(e) => { e.stopPropagation(); setActiveImg(i => Math.min(i + 1, product.images.length - 1)) }}
+                disabled={activeImg === product.images.length - 1}
+              >&#8250;</button>
+            </div>
+
+            {/* Mobile dots */}
+            <div className="pd-mobile-dots">
+              {product.images.map((_, i) => (
+                <span key={i} className={`pd-mobile-dot ${i === activeImg ? 'active' : ''}`} />
+              ))}
+            </div>
+          </div>
+
+          {/* Mobile: thumbs below */}
+          <div className="pd-thumbs pd-thumbs--mobile">
+            {product.images.map((img, i) => (
+              <button
+                key={i}
+                className={`pd-thumb ${activeImg === i ? 'pd-thumb--active' : ''}`}
+                onClick={() => setActiveImg(i)}
+              >
+                <img src={img} alt={`${product.name} ${i + 1}`} />
+              </button>
+            ))}
           </div>
         </div>
 
         {/* ── RIGHT: Info ── */}
         <div className="pd-info">
-
           <div className="pd-breadcrumb">
             <button onClick={() => navigate('/bags')}>All Bags</button>
             <span>/</span>
@@ -132,7 +171,6 @@ export default function ProductDetail() {
 
           <div className="pd-divider" />
 
-          {/* ── COLOR VARIANTS ── */}
           {variants.length > 1 && (
             <div className="pd-variants">
               <span className="pd-variants-label">
@@ -156,7 +194,6 @@ export default function ProductDetail() {
 
           {variants.length > 1 && <div className="pd-divider" />}
 
-          {/* Quantity */}
           <div className="pd-qty-row">
             <span className="pd-qty-label">QUANTITY</span>
             <div className="pd-qty">
@@ -166,7 +203,6 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          {/* Buttons */}
           <div className="pd-btns">
             <button
               className={`pd-cart-btn ${added ? 'pd-cart-btn--added' : ''} ${!product.inStock ? 'pd-cart-btn--disabled' : ''}`}
@@ -184,7 +220,6 @@ export default function ProductDetail() {
             </button>
           </div>
 
-          {/* Features */}
           <div className="pd-features">
             <div className="pd-feature">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12l5 5L20 7"/></svg>
@@ -192,7 +227,7 @@ export default function ProductDetail() {
             </div>
             <div className="pd-feature">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12l5 5L20 7"/></svg>
-              <span>Free Delivery Above Rs.4,000</span>
+              <span>Free Delivery Available</span>
             </div>
             <div className="pd-feature">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round"><path d="M5 12l5 5L20 7"/></svg>
@@ -203,7 +238,6 @@ export default function ProductDetail() {
               <span>Premium Quality Guaranteed</span>
             </div>
           </div>
-
         </div>
       </div>
     </div>

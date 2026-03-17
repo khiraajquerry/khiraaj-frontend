@@ -145,7 +145,7 @@
 .pd-name {
   font-family: 'Cormorant Garamond', serif;
   font-size: 40px;
-  font-weight: 400;
+  font-weight: 600;
   color: var(--black);
   letter-spacing: 2px;
   line-height: 1.1;
@@ -159,8 +159,8 @@
   flex-wrap: wrap;
 }
 .pd-price {
-  font-family: 'Cormorant Garamond', serif;
-  font-size: 32px;
+  font-family:  serif;
+  font-size: 30px;
   font-weight: 600;
   color: var(--black);
 }
@@ -335,4 +335,92 @@
   .pd-cart-btn, .pd-buy-btn { padding: 13px; font-size: 10px; letter-spacing: 1.5px; }
   .pd-features { padding: 12px; gap: 8px; }
   .pd-color-name { letter-spacing: 1px; }
+}
+/* Desktop thumbs — left side */
+.pd-thumbs--desktop { display: flex; }
+.pd-thumbs--mobile  { display: none; }
+
+/* Mobile swipe arrows */
+.pd-mobile-arrows { display: none; }
+.pd-mobile-dots   { display: none; }
+
+/* ── MOBILE ── */
+@media (max-width: 767px) {
+  /* Desktop thumbs hide */
+  .pd-thumbs--desktop { display: none; }
+
+  /* Mobile thumbs — below image, horizontal scroll */
+  .pd-thumbs--mobile {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 0 4px;
+    scrollbar-width: none;
+    width: 100%;
+  }
+  .pd-thumbs--mobile::-webkit-scrollbar { display: none; }
+  .pd-thumbs--mobile .pd-thumb {
+    width: 72px;
+    height: 72px;
+    flex-shrink: 0;
+  }
+
+  /* Main image full width */
+  .pd-main-img {
+    aspect-ratio: 1/1;
+    width: 100%;
+  }
+
+  /* Mobile arrows on image */
+  .pd-mobile-arrows {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    left: 0; right: 0;
+    transform: translateY(-50%);
+    justify-content: space-between;
+    padding: 0 8px;
+    pointer-events: none;
+  }
+  .pd-mob-arrow {
+    pointer-events: all;
+    background: white;
+    border: none;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    opacity: 0.85;
+    line-height: 1;
+  }
+  .pd-mob-arrow:disabled { opacity: 0.2; }
+
+  /* Mobile dots */
+  .pd-mobile-dots {
+    display: flex;
+    position: absolute;
+    bottom: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    gap: 5px;
+  }
+  .pd-mobile-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.5);
+    transition: background 0.3s;
+  }
+  .pd-mobile-dot.active { background: white; }
+
+  /* Images row layout change */
+  .pd-images {
+    flex-direction: column;
+    max-width: 100%;
+  }
 }

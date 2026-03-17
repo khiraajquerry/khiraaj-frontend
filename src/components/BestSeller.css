@@ -139,11 +139,12 @@
 }
 
 /* Add to Cart button */
+/* Add to Cart button */
 .bs-cart-btn {
   width: 100%;
-  background: var(--black);
-  color: var(--white);
-  border: none;
+  background: white;
+  color: var(--black);
+  border: 1.5px solid var(--black);
   padding: 13px;
   font-family: var(--font-body);
   font-size: 11px;
@@ -152,41 +153,24 @@
   text-transform: uppercase;
   cursor: pointer;
   margin-top: auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  position: relative;
-  overflow: hidden;
-  transition: color 0.3s;
+  border-radius: 30px;
+  transition: background 0.3s ease, color 0.3s ease;
 }
-
-/* Brown fill slides from bottom to top on hover */
-.bs-cart-btn::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0;
-  width: 100%;
-  height: 0%;
-  background: var(--brown);
-  transition: height 0.35s ease;
-  z-index: 0;
+.bs-cart-btn:hover {
+  background: var(--black);
+  color: white;
 }
-.bs-cart-btn:hover::before { height: 100%; }
-.bs-cart-btn.added::before { height: 100%; }
-
-/* Keep text above the fill */
+.bs-cart-btn.added {
+  background: var(--black);
+  color: white;
+}
 .btn-content {
-  position: relative;
-  z-index: 1;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  transition: all 0.2s ease;
 }
 
-.bs-cart-btn.added { letter-spacing: 3px; }
 /* Add these to BestSeller.css */
 .bs-show-more {
   text-align: center;

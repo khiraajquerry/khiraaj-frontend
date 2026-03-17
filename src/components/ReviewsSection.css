@@ -104,11 +104,11 @@
 .rs-star.active { color: #c9a84c; }
 
 .rs-text {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: serif;
   font-size: 15px;
-  font-style: italic;
+  font-style:normal;
   font-weight: 300;
-  color: var(--black);
+  color: rgb(63, 63, 63);
   line-height: 1.7;
   margin: 0;
   flex: 1;

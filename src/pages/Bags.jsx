@@ -5,21 +5,104 @@ import { getProducts } from '../api'
 import './Bags.css'
 import { useNavigate } from 'react-router-dom'
 
+function BagCard({ product, onAddToCart, added }) {
+  const navigate = useNavigate()
+  const [imgIndex, setImgIndex] = useState(0)
+  const intervalRef = useRef(null)
+  const touchStartX = useRef(null)
 
-const CartIcon = () => (
-  <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
-    <line x1="3" y1="6" x2="21" y2="6"/>
-    <path d="M16 10a4 4 0 01-8 0"/>
-  </svg>
-)
+  const allImages = [
+    product.img,
+    ...((product.gallery || []).map(g => g.image || g))
+  ].filter(Boolean)
+
+  const startSlideshow = () => {
+    if (allImages.length <= 1) return
+    intervalRef.current = setInterval(() => {
+      setImgIndex(i => (i + 1) % allImages.length)
+    }, 900)
+  }
+
+  const stopSlideshow = () => {
+    setImgIndex(0)
+    clearInterval(intervalRef.current)
+  }
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+  }
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const diff = touchStartX.current - e.changedTouches[0].clientX
+    if (diff > 40) setImgIndex(i => (i + 1) % allImages.length)
+    else if (diff < -40) setImgIndex(i => (i - 1 + allImages.length) % allImages.length)
+    touchStartX.current = null
+  }
+
+  useEffect(() => () => clearInterval(intervalRef.current), [])
+
+  return (
+    <div
+      className={`bag-card ${!product.inStock ? 'out-of-stock' : ''}`}
+      onClick={() => navigate(`/product/${product.id}`)}
+      onMouseEnter={startSlideshow}
+      onMouseLeave={stopSlideshow}
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {product.discount > 0 && <div className="bag-discount">-{product.discount}%</div>}
+      {!product.inStock && <div className="bag-oos-badge">Out of Stock</div>}
+
+      <div className="bag-img-wrap">
+        {allImages.map((src, i) => (
+          <img
+            key={i}
+            src={src}
+            alt={product.name}
+            className={`bag-img-slide ${i === imgIndex ? 'active' : ''}`}
+          />
+        ))}
+        {allImages.length > 1 && (
+          <div className="bag-img-dots">
+            {allImages.map((_, i) => (
+              <span key={i} className={`bag-img-dot ${i === imgIndex ? 'active' : ''}`} />
+            ))}
+          </div>
+        )}
+      </div>
+
+      <div className="bag-info">
+        <p className="bag-name">{product.name}</p>
+        {product.color && (
+          <div className="bag-color-wrap">
+            <span className="bag-color-dot" style={{ background: product.colorHex }} />
+            <span className="bag-color-name">{product.color}</span>
+          </div>
+        )}
+        <div className="bag-prices">
+          <span className="bag-old">Rs.{product.oldPrice?.toLocaleString()}.00</span>
+          <span className="bag-new">Rs.{product.price?.toLocaleString()}.00</span>
+        </div>
+      </div>
+
+      <button
+        className={`bag-cart-btn ${added ? 'added' : ''} ${!product.inStock ? 'disabled' : ''}`}
+        onClick={(e) => { e.stopPropagation(); onAddToCart(e, product) }}
+        disabled={!product.inStock}
+      >
+        <span className="bag-btn-content">
+          {!product.inStock ? 'OUT OF STOCK' : added ? 'ADDED ✓' : 'ADD TO CART'}
+        </span>
+      </button>
+    </div>
+  )
+}
 
 export default function Bags() {
   const { addToCart } = useCart()
-  const navigate = useNavigate()
   const [apiProducts, setApiProducts] = useState([])
   const [added, setAdded]             = useState({})
-  const [hovered, setHovered]         = useState({})
   const [filterOpen, setFilterOpen]   = useState(false)
   const [availability, setAvailability] = useState({ inStock: false, outOfStock: false })
   const [priceRange, setPriceRange]   = useState([0, 5000])
@@ -30,10 +113,11 @@ export default function Bags() {
   useEffect(() => {
     getProducts()
       .then(data => {
-        const formatted =  data.filter(p => p.category !== 'accessories').map(p => ({
+        const formatted = data.filter(p => p.category !== 'accessories').map(p => ({
           id: `api_${p.id}`, name: p.name, price: p.price,
           oldPrice: p.old_price, discount: p.discount, img: p.image,
-          color: p.color || '', colorHex: p.color_hex || '#888', inStock: p.in_stock,
+          color: p.color || '', colorHex: p.color_hex || '#888',
+          inStock: p.in_stock, gallery: p.gallery || [],
         }))
         setApiProducts(formatted)
       })
@@ -164,38 +248,12 @@ export default function Bags() {
       ) : (
         <div className="bags-grid">
           {filtered.map(product => (
-            <div key={product.id} className={`bag-card ${!product.inStock ? 'out-of-stock' : ''}`}
-              onClick={() => navigate(`/product/${product.id}`)}
-              style={{ cursor: 'pointer' }}>
-              {product.discount && <div className="bag-discount">-{product.discount}%</div>}
-              {!product.inStock && <div className="bag-oos-badge">Out of Stock</div>}
-              <div className="bag-img-wrap">
-                <img src={product.img} alt={product.name} className="bag-img" />
-              </div>
-              <div className="bag-info">
-                <p className="bag-name">{product.name}</p>
-                {product.color && (
-                  <div className="bag-color-wrap">
-                    <span className="bag-color-dot" style={{ background: product.colorHex }} />
-                    <span className="bag-color-name">{product.color}</span>
-                  </div>
-                )}
-                <div className="bag-prices">
-                  <span className="bag-old">Rs.{product.oldPrice?.toLocaleString()}.00</span>
-                  <span className="bag-new">Rs.{product.price?.toLocaleString()}.00</span>
-                </div>
-              </div>
-              <button
-                className={`bag-cart-btn ${added[product.id] ? 'added' : ''} ${!product.inStock ? 'disabled' : ''}`}
-                onClick={(e) => handleAddToCart(e, product)}
-                onMouseEnter={() => setHovered(p => ({ ...p, [product.id]: true }))}
-                onMouseLeave={() => setHovered(p => ({ ...p, [product.id]: false }))}
-                disabled={!product.inStock}>
-                <span className="bag-btn-content">
-                  {!product.inStock ? 'OUT OF STOCK' : added[product.id] ? 'ADDED' : hovered[product.id] ? <CartIcon /> : 'ADD TO CART'}
-                </span>
-              </button>
-            </div>
+            <BagCard
+              key={product.id}
+              product={product}
+              onAddToCart={handleAddToCart}
+              added={!!added[product.id]}
+            />
           ))}
         </div>
       )}
