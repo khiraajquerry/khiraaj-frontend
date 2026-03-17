@@ -129,10 +129,7 @@ export default function Checkout() {
   return (
     <div className="checkout-page">
       <div className="checkout-left">
-        <Link to="/" className="checkout-logo">
-          <span className="co-logo-text">KHIRAAJ</span>
-          <span className="co-logo-tag">CARRY ELEGANCE EVERYDAY</span>
-        </Link>
+
 
         {/* Contact */}
         <div className="co-section">

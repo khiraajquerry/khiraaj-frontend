@@ -111,7 +111,6 @@ export default function ProductDetail() {
             onTouchEnd={handleTouchEnd}
           >
             <img src={product.images[activeImg]} alt={product.name} />
-            {product.discount && <div className="pd-badge">-{product.discount}%</div>}
             {!product.inStock && <div className="pd-oos-overlay">OUT OF STOCK</div>}
             <span className="pd-zoom-hint">{zoom ? '−' : '+'}</span>
 
@@ -160,7 +159,9 @@ export default function ProductDetail() {
           </div>
 
           <h1 className="pd-name">{product.name}</h1>
-
+          {product.discount > 0 && (
+  <div className="pd-discount-tag">-{product.discount}% OFF</div>
+)}
           <div className="pd-prices">
             <span className="pd-price">Rs.{product.price.toLocaleString()}.00</span>
             {product.oldPrice && <span className="pd-old">Rs.{product.oldPrice.toLocaleString()}.00</span>}
