@@ -168,7 +168,7 @@
 .pd-name {
   font-family: 'Times New Roman', Times, serif;
   font-size: 40px;
-  font-weight: 500;
+  font-weight: bold;
   color: var(--black);
   letter-spacing: 2px;
   line-height: 1.1;
@@ -439,4 +439,18 @@
   .pd-cart-btn, .pd-buy-btn { padding: 13px; font-size: 10px; letter-spacing: 1.5px; }
   .pd-features { padding: 12px; gap: 8px; }
   .pd-color-name { letter-spacing: 1px; }
+}
+/* Desktop thumbs order */
+.pd-thumbs--desktop { order: 2; }
+.pd-main-img        { order: 1; }
+
+/* Mobile */
+@media (max-width: 767px) {
+  .pd-images {
+    display: flex;
+    flex-direction: column;
+  }
+  .pd-main-img        { order: 1; }
+  .pd-thumbs--mobile  { order: 2; }
+  .pd-thumbs--desktop { display: none; }
 }
