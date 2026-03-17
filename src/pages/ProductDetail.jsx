@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { useCart } from '../context/CartContext'
+import AnnouncementBar from '../components/AnnouncementBar'
 import { getProducts } from '../api'
 import './ProductDetail.css'
 
@@ -66,7 +67,6 @@ export default function ProductDetail() {
     setTimeout(() => setAdded(false), 2000)
   }
 
-  // Touch swipe for main image
   const handleTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX
   }
@@ -84,26 +84,15 @@ export default function ProductDetail() {
   const savings = (product.oldPrice || 0) - product.price
 
   return (
+    
     <div className="pd-page">
+      <AnnouncementBar />
       <div className="pd-container">
 
         {/* ── LEFT: Images ── */}
         <div className="pd-images">
 
-          {/* Desktop: thumbs on left side */}
-          <div className="pd-thumbs pd-thumbs--desktop">
-            {product.images.map((img, i) => (
-              <button
-                key={i}
-                className={`pd-thumb ${activeImg === i ? 'pd-thumb--active' : ''}`}
-                onClick={() => setActiveImg(i)}
-              >
-                <img src={img} alt={`${product.name} ${i + 1}`} />
-              </button>
-            ))}
-          </div>
-
-          {/* Main image */}
+          {/* Main image — PEHLE */}
           <div
             className={`pd-main-img ${zoom ? 'pd-main-img--zoom' : ''}`}
             onClick={() => setZoom(z => !z)}
@@ -114,7 +103,6 @@ export default function ProductDetail() {
             {!product.inStock && <div className="pd-oos-overlay">OUT OF STOCK</div>}
             <span className="pd-zoom-hint">{zoom ? '−' : '+'}</span>
 
-            {/* Mobile swipe arrows */}
             <div className="pd-mobile-arrows">
               <button
                 className="pd-mob-arrow"
@@ -128,7 +116,6 @@ export default function ProductDetail() {
               >&#8250;</button>
             </div>
 
-            {/* Mobile dots */}
             <div className="pd-mobile-dots">
               {product.images.map((_, i) => (
                 <span key={i} className={`pd-mobile-dot ${i === activeImg ? 'active' : ''}`} />
@@ -136,7 +123,20 @@ export default function ProductDetail() {
             </div>
           </div>
 
-          {/* Mobile: thumbs below */}
+          {/* Desktop thumbs — NEECHE */}
+          <div className="pd-thumbs pd-thumbs--desktop">
+            {product.images.map((img, i) => (
+              <button
+                key={i}
+                className={`pd-thumb ${activeImg === i ? 'pd-thumb--active' : ''}`}
+                onClick={() => setActiveImg(i)}
+              >
+                <img src={img} alt={`${product.name} ${i + 1}`} />
+              </button>
+            ))}
+          </div>
+
+          {/* Mobile thumbs — NEECHE */}
           <div className="pd-thumbs pd-thumbs--mobile">
             {product.images.map((img, i) => (
               <button
@@ -159,9 +159,11 @@ export default function ProductDetail() {
           </div>
 
           <h1 className="pd-name">{product.name}</h1>
+
           {product.discount > 0 && (
-  <div className="pd-discount-tag">-{product.discount}% OFF</div>
-)}
+            <div className="pd-discount-tag">-{product.discount}% OFF</div>
+          )}
+
           <div className="pd-prices">
             <span className="pd-price">Rs.{product.price.toLocaleString()}.00</span>
             {product.oldPrice && <span className="pd-old">Rs.{product.oldPrice.toLocaleString()}.00</span>}
