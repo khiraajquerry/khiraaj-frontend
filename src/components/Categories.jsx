@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom'
 import './Categories.css'
 
 const categories = [
-  { name: 'Tote Bags',      link: '/category/tote-bags',      img: '/img3.jpg' },
-  { name: 'Hand Bag',       link: '/category/hand-bags',     img: '/img4.jpg' },
-  { name: 'Clutch Bags',    link: '/category/clutch-bags',    img: '/img5.jpg' },
-  { name: '3 Piece Bags',   link: '/category/3-piece-bags',   img: '/img6.jpg' },
-  { name: 'Crossbody Bags', link: '/category/crossbody-bags', img: '/img7.jpg' },
+  { name: 'Tote Bags',      link: '/category/tote-bags',      img: '/ist.png' },
+  { name: 'Hand Bag',       link: '/category/hand-bags',     img: '/hand.png' },
+  { name: 'Clutch Bags',    link: '/category/clutch-bags',    img: '/clutch.png' },
+  { name: '3 Piece Bags',   link: '/category/3-piece-bags',   img: '/3piece.png' },
+  { name: 'Crossbody Bags', link: '/category/crossbody-bags', img: '/cross.png' },
 ]
 
 export default function Categories() {
