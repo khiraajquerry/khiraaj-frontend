@@ -61,6 +61,7 @@ export default function Checkout() {
   const [loading, setLoading]         = useState(false)
   const [error, setError]             = useState('')
   const [errors, setErrors]           = useState({})
+  const [orderId, setOrderId] = useState(null)
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target
@@ -106,6 +107,7 @@ export default function Checkout() {
     try {
       const res = await submitOrder(orderData)
       if (res.order_id) {
+        setOrderId(res.order_id)
         setOrderPlaced(true)
         clearCart()
       }
@@ -121,6 +123,13 @@ export default function Checkout() {
       <div className="success-icon">✓</div>
       <h2>Order Placed!</h2>
       <p>Thank you <strong>{form.firstName || 'Customer'}</strong>! Your order has been received.</p>
+
+      {/* Order ID box */}
+    <div className="order-id-box">
+      <p>Your Order ID</p>
+      <h3>#{orderId}</h3>
+      <small>Save this ID to track your order</small>
+    </div>
       <p className="success-sub">We will contact you shortly. Cash on Delivery available.</p>
       <Link to="/" className="back-home-btn">Continue Shopping</Link>
     </div>
