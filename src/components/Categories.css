@@ -19,8 +19,8 @@
   background: var(--black);
 }
 .cat-title {
-  font-family: var(--font-body);
-  font-size: 22px;
+  font-family:serif;
+  font-size: 25px;
   font-weight: 700;
   letter-spacing: 4px;
   color: var(--black);

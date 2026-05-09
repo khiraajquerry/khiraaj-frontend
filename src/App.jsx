@@ -6,7 +6,7 @@ import Footer               from './components/Footer'
 import Home                 from './pages/Home'
 import Bags                 from './pages/Bags'
 import NewArrival           from './pages/NewArrival'
-import Accessories          from './pages/Accessories'
+import Fragrances from './pages/Fragrances'
 import Contact              from './pages/Contact'
 import CategoryPage from './pages/CategoryPage'
 import Checkout             from './pages/Checkout'
@@ -34,7 +34,7 @@ function Layout() {
         <Route path="/"                 element={<Home />} />
         <Route path="/bags"             element={<Bags />} />
         <Route path="/new-arrival"      element={<NewArrival />} />
-        <Route path="/accessories"      element={<Accessories />} />
+        <Route path="/fragrances" element={<Fragrances />} />
         <Route path="/contact"          element={<Contact />} />
         <Route path="/reviews"          element={<Reviews />} />
         <Route path="/checkout"         element={<Checkout />} />

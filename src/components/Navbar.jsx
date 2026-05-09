@@ -10,7 +10,7 @@ const navLinks = [
   { label: 'Home',        path: '/' },
   { label: 'Bags',        path: '/bags' },
   { label: 'New Arrival', path: '/new-arrival' },
-  { label: 'Accessories', path: '/accessories' },
+  { label: 'Fragrance', path: '/fragrances' },
   { label: 'Contact Us',  path: '/contact' },
   { label: 'Reviews',     path: '/reviews' },
 ]
@@ -22,6 +22,7 @@ const CartIcon = () => (
     <path d="M16 10a4 4 0 01-8 0"/>
   </svg>
 )
+
 
 export default function Navbar() {
   const [scrolled,   setScrolled]   = useState(false)

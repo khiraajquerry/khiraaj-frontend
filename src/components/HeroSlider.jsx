@@ -21,7 +21,7 @@ const slides = [
     desc: 'Discover our exclusive accessories collection.',
     btnText: 'Shop Accessories',
     btnLink: '/accessories',
-    video: '/videos/video2.mp4',
+    video: '/videos/video1.mp4',
 
   },
   {
@@ -31,7 +31,7 @@ const slides = [
     desc: 'Professional bags designed for the modern workspace.',
     btnText: 'Explore Now',
     btnLink: '/bags',
-    video: '/videos/video3.mp4',
+    video: '/videos/video1.mp4',
 
   },
   {
@@ -41,7 +41,7 @@ const slides = [
     desc: 'Exclusive pieces with premium materials. Limited availability.',
     btnText: 'View New Arrivals',
     btnLink: '/new-arrival',
-    video: '/videos/video4.mp4',
+    video: '/videos/video1.mp4',
   
   },
   {
@@ -51,7 +51,7 @@ const slides = [
     desc: 'Free delivery on orders available across Pakistan.',
     btnText: 'Shop Now',
     btnLink: '/bags',
-    video: '/videos/video5.mp4',
+    video: '/videos/video1.mp4',
 
   },
 ]

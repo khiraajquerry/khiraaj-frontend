@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import './WhatsAppButton.css'
 
-const PHONE = '923496287450'
+const PHONE = '923411417686'
 
 const botMessages = [
   { id: 1, text: "Hi! Welcome to KHIRAAJ — Carry Elegance Everyday!", delay: 0 },

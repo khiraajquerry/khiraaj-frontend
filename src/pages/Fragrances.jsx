@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext'
 import { getProducts } from '../api'
 import { useNavigate } from 'react-router-dom'
 import AnnouncementBar from '../components/AnnouncementBar'
-import './Accessories.css'
+import './Fragrances.css'
 
 const CartIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -13,7 +13,7 @@ const CartIcon = () => (
   </svg>
 )
 
-export default function Accessories() {
+export default function Fragrances() {
   const { addToCart } = useCart()
   const navigate = useNavigate()
 
@@ -24,7 +24,7 @@ export default function Accessories() {
 
   useEffect(() => {
     setLoading(true)
-    getProducts('accessories')
+    getProducts('fragrances')
       .then(data => {
         const formatted = data.map(p => ({
           id: `api_${p.id}`,
@@ -57,9 +57,9 @@ export default function Accessories() {
 
       {/* Hero */}
       <div className="ac-hero">
-        <p className="ac-tag">COMPLETE YOUR LOOK</p>
-        <h1 className="ac-title">ACCESSORIES</h1>
-        <p className="ac-subtitle">The finishing touch to every outfit</p>
+        <p className="ac-tag">DISCOVER YOUR SIGNATURE SCENT</p>
+<h1 className="ac-title">Fragrances</h1>
+<p className="ac-subtitle">Luxurious scents crafted to leave a lasting impression</p>
       </div>
 
       {/* Loading */}
@@ -76,7 +76,7 @@ export default function Accessories() {
         <div className="ac-empty">
           <div className="ac-empty-icon">✦</div>
           <h2 className="ac-empty-title">Coming Soon</h2>
-          <p className="ac-empty-text">Our accessories collection is on its way. Check back soon!</p>
+          <p className="ac-empty-text">Our fragrance collection is on its way. Check back soon!</p>
           <button className="ac-empty-btn" onClick={() => navigate('/bags')}>
             SHOP ALL BAGS
           </button>

@@ -1,7 +1,7 @@
 import './MarqueeStrip.css'
 
 const items = [
-  'Premium Quality', 'Free Delivery Above Rs 4,000',
+  'Premium Quality', 'Free Delivery Available',
   'Cash On Delivery', 'New Arrivals Weekly',
   'Handcrafted Bags', "Pakistan's Finest",
 ]

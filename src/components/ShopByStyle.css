@@ -19,7 +19,7 @@
   background: var(--black);
 }
 .sbs-title {
-  font-family: var(--font-display);
+  font-family: serif;
   font-size: 32px;
   font-weight: 600;
   color: var(--black);

@@ -79,7 +79,7 @@ export default function ReviewsSection() {
               )}
               <div className="rs-card-body">
                 <Stars count={r.rating} />
-                <p className="rs-text">"{r.review}"</p>
+                <p className="rs-text">{r.review}</p>
                 <div className="rs-footer">
                   <span className="rs-name">{r.name}</span>
                   <span className="rs-product">{r.product}</span>

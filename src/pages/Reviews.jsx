@@ -78,7 +78,7 @@ export default function Reviews() {
             <input
               className={`rf-input ${errors.name ? 'rf-error' : ''}`}
               type="text"
-              placeholder="e.g. Laraib"
+              placeholder="e.g. M.Azan"
               value={form.name}
               onChange={e => setForm(f => ({ ...f, name: e.target.value }))}
             />

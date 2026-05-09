@@ -16,11 +16,11 @@
   flex: 1;
   max-width: 120px;
   height: 1px;
-  background: var(--light-gray);
+  background: black;
 }
 .rs-title {
-  font-family: var(--font-body);
-  font-size: 12px;
+  font-family: serif;
+  font-size: 23px;
   font-weight: 700;
   letter-spacing: 5px;
   color: var(--black);
