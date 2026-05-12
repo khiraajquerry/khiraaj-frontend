@@ -135,7 +135,7 @@ export default function ShopByStyle() {
     <section className="sbs-section">
       <div className="sbs-heading">
         <span className="sbs-line" />
-        <h2 className="sbs-title">Shop By Style</h2>
+        <h2 className="sbs-title">SHOP BY STYLE</h2>
         <span className="sbs-line" />
       </div>
 

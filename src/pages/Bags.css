@@ -497,7 +497,7 @@
 @media (max-width: 600px) {
   .bags-grid { grid-template-columns: repeat(2, 1fr) !important; padding: 0 10px; gap: 8px; }
   .bags-toolbar { padding: 12px; }
-  .bags-title { font-size: 30px; letter-spacing: 1px; }
+  .bags-title { font-size: 30px; letter-spacing: 1px; font-weight: 600;}
   .bags-count { padding: 10px; font-size: 11px; }
   .bag-name { font-size: 11px; }
   .bag-new { font-size: 12px; }

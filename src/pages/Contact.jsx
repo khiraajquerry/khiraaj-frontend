@@ -23,9 +23,8 @@ const styles = `
   .page-title {
     font-size: 42px;
     font-family: serif;
-    font-weight: 300;
+    font-weight: 600;
     letter-spacing: 1px;
-    text-transform: uppercase;
     margin-bottom: 10px;
   }
 
