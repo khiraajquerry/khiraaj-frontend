@@ -65,7 +65,7 @@ export default function Reviews() {
   return (
     <div className="reviews-page">
       <div className="reviews-hero">
-        <h1 className="reviews-title">SHARE YOUR EXPERIENCE</h1>
+        <h1 className="reviews-title">Share Your Experience</h1>
         <p className="reviews-subtitle">We'd love to hear what you think</p>
       </div>
 

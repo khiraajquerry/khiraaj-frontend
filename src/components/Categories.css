@@ -19,11 +19,12 @@
   background: var(--black);
 }
 .cat-title {
-  font-family:serif;
+  font-family:  serif;
   font-size: 32px;
-  font-weight: 700;
-  letter-spacing: 4px;
+  font-weight: 600;
+  letter-spacing: 1px;
   color: var(--black);
+  text-transform: uppercase;
   white-space: nowrap;
 }
 
@@ -106,5 +107,5 @@
   }
   .cat-img-wrap { width: 85px !important; height: 85px !important; border-radius: 50% !important; }
   .cat-name { font-size: 9px; letter-spacing: 1px; }
-  .cat-title { font-size: 13px; letter-spacing: 1px; }
+  .cat-title { font-size: 20px; letter-spacing: 1px; }
 }

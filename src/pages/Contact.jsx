@@ -1,4 +1,6 @@
 import AnnouncementBar from '../components/AnnouncementBar';
+// 1. Toast library import ki
+import toast, { Toaster } from 'react-hot-toast';
 
 const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap');
@@ -140,9 +142,63 @@ const styles = `
 `;
 
 export default function Contact() {
+  
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    // 2. Loading state start hoti hai jab button press ho
+    const toastId = toast.loading('Sending message...');
+    
+    const formData = {
+      name: e.target[0].value,
+      email: e.target[1].value,
+      subject: e.target[2].value,
+      message: e.target[3].value,
+    };
+
+    try {
+      const response = await fetch('http://127.0.0.1:8000/api/contact/', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        // 3. Alert ki jagah Success Toast lagaya aur design ko aapki theme ke mutabiq black & white kiya
+        toast.success("Message sent successfully!", {
+          id: toastId, // yeh loading wale message ko replace kar dega
+          style: {
+            border: '1px solid #1a1a1a',
+            padding: '16px',
+            color: '#1a1a1a',
+            fontFamily: 'Jost, sans-serif',
+          },
+          iconTheme: {
+            primary: '#1a1a1a',
+            secondary: '#fff',
+          },
+        });
+        e.target.reset(); // Automatically clears the form after a successful send
+      } else {
+        // 4. Error ke liye Alert hata kar Toast
+        toast.error("Something went wrong.", { id: toastId });
+      }
+    } catch (error) {
+      console.error("Error:", error);
+      // Catch block ke liye bhi error toast
+      toast.error("Server error. Please check your connection.", { id: toastId });
+    }
+  };
+
   return (
     <>
       <style>{styles}</style>
+      
+      {/* 5. Toaster yahan add kiya jo actual popups ko screen par show karta hai */}
+      <Toaster position="bottom-right" reverseOrder={false} />
+      
       <AnnouncementBar />
 
       <div className="contact-page">
@@ -174,27 +230,27 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Column: Form */}
-          <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
+          {/* Right Column: Form (Updated with onSubmit) */}
+          <form className="contact-form" onSubmit={handleSubmit}>
             <div className="form-row">
               <div className="input-group">
                 <label>Name</label>
-                <input type="text" placeholder="Your Name" />
+                <input type="text" placeholder="Your Name" required />
               </div>
               <div className="input-group">
                 <label>Email</label>
-                <input type="email" placeholder="Your Email" />
+                <input type="email" placeholder="Your Email" required />
               </div>
             </div>
             
             <div className="input-group">
               <label>Subject</label>
-              <input type="text" placeholder="How can we help?" />
+              <input type="text" placeholder="How can we help?" required />
             </div>
 
             <div className="input-group">
               <label>Message</label>
-              <textarea rows="6" placeholder="Write your message here..."></textarea>
+              <textarea rows="6" placeholder="Write your message here..." required></textarea>
             </div>
 
             <button type="submit" className="submit-btn">Send Message</button>

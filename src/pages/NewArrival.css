@@ -15,7 +15,7 @@
 .na-tag {
   font-family: var(--font-body);
   font-size: 10px;
-  letter-spacing: 5px;
+  letter-spacing: 1px;
   color: var(--brown);
   text-transform: uppercase;
   margin: 0 0 12px;
@@ -32,7 +32,7 @@
 .na-subtitle {
   font-family: var(--font-body);
   font-size: 11px;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
   color: var(--gray);
   text-transform: uppercase;
   margin: 0;
@@ -259,7 +259,7 @@
 @media (max-width: 599px) {
   .na-grid  { grid-template-columns: repeat(2, 1fr); padding: 12px 10px 0; gap: 8px; }
   .na-count { padding: 10px; font-size: 11px; }
-  .na-title { font-size: 30px; letter-spacing: 6px; }
+  .na-title { font-size: 30px; letter-spacing: 1px; font-weight: 600; }
   .na-name  { font-size: 11px; }
   .na-new   { font-size: 12px; }
   .na-cart-btn { font-size: 9px; padding: 10px 6px; letter-spacing: 1px; }

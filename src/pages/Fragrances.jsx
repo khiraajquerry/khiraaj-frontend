@@ -58,7 +58,7 @@ export default function Fragrances() {
       {/* Hero */}
       <div className="ac-hero">
         <p className="ac-tag">DISCOVER YOUR SIGNATURE SCENT</p>
-<h1 className="ac-title">Fragrances</h1>
+<h1 className="ac-title">FRAGRANCES</h1>
 <p className="ac-subtitle">Luxurious scents crafted to leave a lasting impression</p>
       </div>
 

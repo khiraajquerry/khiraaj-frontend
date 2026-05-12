@@ -60,7 +60,7 @@ export default function ReviewsSection() {
     <section className="rs-section">
       <div className="rs-header">
         <span className="rs-line" />
-        <h2 className="rs-title">WHAT OUR CUSTOMERS SAY</h2>
+        <h2 className="rs-title">What Our Customers Say</h2>
         <span className="rs-line" />
       </div>
 

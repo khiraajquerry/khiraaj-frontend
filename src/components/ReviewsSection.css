@@ -13,16 +13,16 @@
   margin-bottom: 48px;
 }
 .rs-line {
-  flex: 1;
-  max-width: 120px;
-  height: 1px;
-  background: black;
+  display: block;
+  width: 60px;
+  height: 2px;
+  background: var(--black);
 }
 .rs-title {
   font-family: serif;
-  font-size: 23px;
+  font-size: 32px;
   font-weight: 700;
-  letter-spacing: 5px;
+  letter-spacing: 1px;
   color: var(--black);
   margin: 0;
   white-space: nowrap;
@@ -180,7 +180,7 @@
 }
 @media (max-width: 600px) {
   .rs-section { padding: 40px 12px; }
-  .rs-title { font-size: 10px; letter-spacing: 3px; }
+  .rs-title { font-size: 20px; letter-spacing: 1px; }
   .rs-card-body { padding: 16px; }
   .rs-text { font-size: 14px; }
   .rs-arrow { width: 32px; height: 32px; margin-top: 50px; }

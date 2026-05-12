@@ -166,7 +166,7 @@
 .pd-breadcrumb button:hover { color: var(--black); }
 
 .pd-name {
-  font-family: 'Times New Roman', Times, serif;
+  /* font-family: serif; */
   font-size: 40px;
   font-weight: bold;
   color: var(--black);

@@ -15,7 +15,7 @@
 .ac-tag {
   font-family: var(--font-body);
   font-size: 10px;
-  letter-spacing: 5px;
+  letter-spacing: 1px;
   color: var(--brown);
   text-transform: uppercase;
   margin: 0 0 12px;
@@ -32,9 +32,9 @@
 .ac-subtitle {
   font-family: var(--font-body);
   font-size: 11px;
-  letter-spacing: 4px;
+  letter-spacing: 1px;
   color: var(--gray);
-  text-transform: uppercase;
+  text-transform: capitalize;
   margin: 0;
 }
 
@@ -248,7 +248,7 @@
 @media (max-width: 599px) {
   .ac-grid  { grid-template-columns: repeat(2, 1fr); padding: 12px 10px 0; gap: 8px; }
   .ac-count { padding: 10px; font-size: 11px; }
-  .ac-title { font-size: 30px; letter-spacing: 6px; }
+  .ac-title { font-size: 30px; letter-spacing: 1px; font-weight: 600; }
   .ac-name  { font-size: 11px; }
   .ac-new   { font-size: 12px; }
   .ac-cart-btn { font-size: 9px; padding: 10px 6px; letter-spacing: 1px; }
