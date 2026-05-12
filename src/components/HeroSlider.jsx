@@ -14,16 +14,16 @@ const slides = [
     btnLink: '/bags',
     video: '/videos/video1.mp4',
   },
-  {
-    tag: 'Accessories',
-    title: 'Elevate Your',
-    titleItalic: 'Style',
-    desc: 'Discover our exclusive accessories collection.',
-    btnText: 'Shop Accessories',
-    btnLink: '/accessories',
-    video: '/videos/video1.mp4',
+  // {
+  //   tag: 'Accessories',
+  //   title: 'Elevate Your',
+  //   titleItalic: 'Style',
+  //   desc: 'Discover our exclusive accessories collection.',
+  //   btnText: 'Shop Accessories',
+  //   btnLink: '/accessories',
+  //   video: '/videos/video1.mp4',
 
-  },
+  // },
   {
     tag: 'Office Essentials',
     title: 'Work in',

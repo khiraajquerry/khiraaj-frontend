@@ -154,14 +154,114 @@
   border-color: var(--white);
 }
 
+/* --- UPDATE THESE MEDIA QUERIES AT THE BOTTOM OF YOUR CSS --- */
+
 @media (max-width: 768px) {
   .hero-slider { height: 50vh; }
   .slide-title { font-size: 40px; }
   .slide-content { padding: 0 30px; }
   .slider-arrows { display: none; } 
+  .slider-dots { left: 30px; bottom: 25px; } /* Fix dots alignment for tablet */
+}
+
+@media (max-width: 480px) {
+  .hero-slider { height: 45vh; } /* Thori height increase ki taake text compress na ho */
+  
+  .slide-content { 
+    padding: 0 20px; 
+  }
+  
+  .slide-tag { 
+    font-size: 9px; 
+    letter-spacing: 2px;
+    margin-bottom: 8px; /* Margin kam kiya */
+  }
+  
+  .slide-title { 
+    font-size: 32px; /* Text thora chota kiya taake neat lagay */
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  
+  .slide-desc { 
+    font-size: 12px; 
+    margin-bottom: 24px;
+    line-height: 1.5;
+    max-width: 90%;
+  }
+
+  /* Button ko mobile ke hisaab se shrink kiya */
+  .slide-btn {
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  /* Dots ko left align aur chota kiya */
+  .slider-dots { 
+    left: 20px; 
+    bottom: 20px; 
+    gap: 8px;
+  }
+  .slider-dot {
+    width: 20px; 
+    height: 2px;
+  }
+  .slider-dot.active { 
+    width: 35px; 
+  }
 }
 @media (max-width: 480px) {
-  .hero-slider { height: 45vh; }
-  .slide-title { font-size: 26px; }
-  .slide-desc { font-size: 11px; }
+  .hero-slider { height: 45vh; } 
+  
+  /* YAHAN CODE ADD KIYA HAI - Text ko neechay push karne ke liye */
+  .slide { 
+    align-items: flex-end; 
+    padding-bottom: 60px; /* Yeh text ko dots ke thora sa upar set karega */
+  }
+  
+  .slide-content { 
+    padding: 0 20px; 
+    width: 100%; /* Taake text layout proper rahay */
+  }
+  
+  .slide-tag { 
+    font-size: 9px; 
+    letter-spacing: 2px;
+    margin-bottom: 8px; 
+  }
+  
+  .slide-title { 
+    font-size: 32px; 
+    margin-bottom: 12px;
+    line-height: 1.1;
+  }
+  
+  .slide-desc { 
+    font-size: 12px; 
+    margin-bottom: 24px;
+    line-height: 1.5;
+    max-width: 90%;
+  }
+
+  .slide-btn {
+    padding: 10px 24px;
+    font-size: 10px;
+    letter-spacing: 2px;
+  }
+
+  .slider-dots { 
+    left: 20px; 
+    bottom: 20px; /* Dots bottom se 20px upar hain, aur text 60px upar hoga */
+    gap: 8px;
+  }
+  
+  .slider-dot {
+    width: 20px; 
+    height: 2px;
+  }
+  
+  .slider-dot.active { 
+    width: 35px; 
+  }
 }
